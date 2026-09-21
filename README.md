@@ -31,22 +31,24 @@ No WhatsApp. No SMS. No paid Twilio number.
 
 ## Project Structure
 
-clicknotify/
-├── backend/
-│ └── src/main/java/com/clicknotify/
-│ ├── controller/ (Notification, TelegramLink)
-│ ├── service/ (Notification, Email, Telegram, TelegramLink)
-│ ├── repository/
-│ ├── entity/
-│ ├── dto/
-│ ├── config/
-│ ├── security/ (API key + rate limit interceptor)
-│ └── exception/
-└── frontend/
-└── src/
-├── App.jsx
-└── services/api.js
-
+```text
+clicknotify
+├── backend
+│   ├── controller
+│   ├── service
+│   ├── repository
+│   ├── entity
+│   ├── dto
+│   ├── config
+│   ├── security
+│   └── exception
+└── frontend
+    ├── src
+    │   ├── App.jsx
+    │   └── services
+    │       └── api.js
+    └── public
+```
 
 ## Setup
 
