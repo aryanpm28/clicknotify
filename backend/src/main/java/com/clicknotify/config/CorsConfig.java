@@ -33,8 +33,6 @@ public class CorsConfig {
 
             @Override
             public void addInterceptors(InterceptorRegistry registry) {
-                // Only /notifications/** and /telegram/** need the API key
-                // and rate limit.
                 registry.addInterceptor(apiKeyInterceptor)
                         .addPathPatterns("/notifications/**", "/telegram/**");
             }
