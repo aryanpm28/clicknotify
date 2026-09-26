@@ -12,7 +12,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/notifications")
-@CrossOrigin(origins = "http://localhost:5173")
 public class NotificationController {
 
     private final NotificationService notificationService;
@@ -24,7 +23,10 @@ public class NotificationController {
     @PostMapping
     public ResponseEntity<NotificationResponse> createNotification(
             @Valid @RequestBody NotificationRequest request) {
-        NotificationResponse response = notificationService.createNotification(request);
+
+        NotificationResponse response =
+                notificationService.createNotification(request);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
