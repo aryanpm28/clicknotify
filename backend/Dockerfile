@@ -2,14 +2,13 @@ FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
-COPY pom.xml .
+COPY . .
 
-COPY src ./src
-
-RUN chmod +x mvnw 2>/dev/null || true
-
-RUN if [ -f mvnw ]; then ./mvnw clean package -DskipTests; else apt-get update && apt-get install -y maven && mvn clean package -DskipTests; fi
+RUN apt-get update \
+    && apt-get install -y maven \
+    && mvn clean package -DskipTests \
+    && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 8080
 
-CMD ["sh", "-c", "java -jar target/*.jar"]
+CMD ["java", "-jar", "target/clicknotify-1.0.0.jar"]
