@@ -2,6 +2,7 @@ package com.clicknotify.config;
 
 import com.clicknotify.security.ApiKeyInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -14,13 +15,17 @@ public class CorsConfig {
     @Autowired
     private ApiKeyInterceptor apiKeyInterceptor;
 
+    @Value("${app.cors.allowed-origins}")
+    private String allowedOrigins;
+
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
+
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:5173")
+                        .allowedOrigins(allowedOrigins.split(","))
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
@@ -28,8 +33,8 @@ public class CorsConfig {
 
             @Override
             public void addInterceptors(InterceptorRegistry registry) {
-                // Only /notifications/** needs the key + rate limit — keeps
-                // things simple since this API has nothing else to protect.
+                // Only /notifications/** and /telegram/** need the API key
+                // and rate limit.
                 registry.addInterceptor(apiKeyInterceptor)
                         .addPathPatterns("/notifications/**", "/telegram/**");
             }
