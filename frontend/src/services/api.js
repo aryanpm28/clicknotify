@@ -5,6 +5,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
     // Must match the backend's security.api-key (API_KEY env var).
+    // Production API URL is supplied by Vercel environment variables.
     'X-API-Key': import.meta.env.VITE_API_KEY
   }
 })
