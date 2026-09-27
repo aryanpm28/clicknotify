@@ -1,4 +1,3 @@
-```java
 package com.clicknotify.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -103,4 +102,4 @@ public class EmailService {
                 """.formatted(userName, productName);
     }
 }
-```
+
